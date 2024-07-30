@@ -1,5 +1,6 @@
 using FullLibrary.Data;
 using FullLibrary.Security;
+using FullLibrary.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 );
 builder.Services.AddDbContext<AuthenticationContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+//configuring dependency injection
+builder.Services.AddTransient<IAuthService, AuthService>();
 
 var app = builder.Build();
 
