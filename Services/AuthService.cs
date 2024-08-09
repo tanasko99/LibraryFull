@@ -12,13 +12,16 @@ namespace FullLibrary.Services
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
+        private readonly IUserService _userService;
 
 
         public AuthService(
             UserManager<ApplicationUser> userManager,
+            IUserService userService,
             IConfiguration configuration)
         {
             _userManager = userManager;
+            _userService = userService;
             _configuration = configuration;
         }
 
@@ -67,5 +70,41 @@ namespace FullLibrary.Services
             }
         }
 
+        public async Task<Result> RegisterLibrarian(RegisterDto model)
+        {
+            try
+            {
+                var librarianExists = await _userManager.FindByEmailAsync(model.Email);
+                if (librarianExists != null)
+                    Result.Fail("Librarian already exists!");
+
+                ApplicationUser user = new()
+                {
+                    Email = model.Email,
+                    UserName = model.Email,
+                    SecurityStamp = Guid.NewGuid().ToString()
+                };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (!result.Succeeded)
+                    Result.Fail($"Failed to register {model.Email}");
+                await _userManager.AddToRoleAsync(user, UserRoles.Librarian);
+                _userService.CreateUser(new UserDto
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email,
+                });
+                return Result.Ok();
+            }
+            catch(Exception ex)
+            {
+                return Result.Fail(ex.Message);
+            }
+        }
+
+        public Task<Result> RegisterUser(RegisterDto model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
