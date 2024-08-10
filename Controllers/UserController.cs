@@ -33,7 +33,7 @@ namespace FullLibrary.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        
+        [Authorize(Roles = "Admin", AuthenticationSchemes = "Bearer")]
         [HttpPost("register-librarian")]
         public async Task<IResult> RegisterLibrarian([FromBody] RegisterDto model)
         {
@@ -42,6 +42,33 @@ namespace FullLibrary.Controllers
             {
                 { IsFailed: true } => Results.BadRequest($"{result.Errors}"),
                 { IsSuccess: true } => Results.Ok("Librarian successfuly created"),
+                _ => Results.BadRequest("Something went wrong")
+            };
+        }
+
+        /// <summary>
+        /// Authorized for: librarians role, can register user
+        /// </summary>
+        /// <param name="model">
+        /// Role = Librarian
+        /// </param>
+        /// <response code="200">Authentication is successful, token is retrieved.</response>
+        /// <response code="400">Not authenticated</response>
+        /// <response code="401">Not authorized</response>
+        /// <response code="500">Internal server error</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Librarian", AuthenticationSchemes = "Bearer")]
+        [HttpPost("register-user")]
+        public async Task<IResult> RegisterUser([FromBody] RegisterDto model)
+        {
+            var result = await _authService.RegisterUser(model);
+            return result switch
+            {
+                { IsFailed: true } => Results.BadRequest($"{result.Errors}"),
+                { IsSuccess: true } => Results.Ok("User successfuly created"),
                 _ => Results.BadRequest("Something went wrong")
             };
         }

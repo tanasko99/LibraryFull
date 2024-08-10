@@ -102,9 +102,36 @@ namespace FullLibrary.Services
             }
         }
 
-        public Task<Result> RegisterUser(RegisterDto model)
+        public async Task<Result> RegisterUser(RegisterDto model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var librarianExists = await _userManager.FindByEmailAsync(model.Email);
+                if (librarianExists != null)
+                    Result.Fail("User already exists!");
+
+                ApplicationUser user = new()
+                {
+                    Email = model.Email,
+                    UserName = model.Email,
+                    SecurityStamp = Guid.NewGuid().ToString()
+                };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (!result.Succeeded)
+                    Result.Fail($"Failed to register {model.Email}");
+                await _userManager.AddToRoleAsync(user, UserRoles.User);
+                _userService.CreateUser(new UserDto
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email
+                });
+                return Result.Ok();
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail(ex.Message);
+            }
         }
     }
 }
