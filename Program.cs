@@ -58,6 +58,7 @@ builder.Services.AddDbContext<AuthenticationContext>(options => options.UseSqlSe
 //configuring dependency injection
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IUserService,UserService>();
+builder.Services.AddTransient<IAuthorService, AuthorService>();
 builder.Services.AddTransient<IRepositoryWrapper,RepositoryWrapper>();
 
 // configure automapper
