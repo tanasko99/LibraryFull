@@ -22,7 +22,16 @@ namespace FullLibrary.Services
 
         public void UpdateUser(int id, UpdateProfileDto model)
         {
-            throw new NotImplementedException();
+            var existingUser = _repository.User.GetUserById(id);
+            if (existingUser == null)
+            {
+                throw new ArgumentException(
+                    "User with that ID doesn't exist", nameof(id));
+            }
+            existingUser.FirstName = model.FirstName;
+            existingUser.LastName = model.LastName;
+            _repository.User.UpdateUser(existingUser);
+            _repository.Save();
         }
     }
 }
