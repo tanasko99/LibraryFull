@@ -88,14 +88,14 @@ namespace FullLibrary.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        //[Authorize(Roles = "Librarian,User", AuthenticationSchemes = "Bearer")]
+        [Authorize(Roles = "Librarian,User", AuthenticationSchemes = "Bearer")]
         [HttpPut("{id}")]
         public ActionResult UpdateUser(int id, [FromBody] UpdateProfileDto model)
         {
             try
             {
                 _userService.UpdateUser(id, model);
-                return Ok("Updated");
+                return Ok("User successfuly updated");
             }
             catch (Exception ex)
             {
