@@ -73,5 +73,35 @@ namespace FullLibrary.Controllers
             };
         }
 
+
+        /// <summary>
+        /// Authorized for: librarian,user
+        /// </summary>
+        /// <param name="model">
+        /// Role = Librarian
+        /// </param>
+        /// <response code="200">Authentication is successful, token is retrieved.</response>
+        /// <response code="400">Not authenticated</response>
+        /// <response code="401">Not authorized</response>
+        /// <response code="500">Internal server error</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //[Authorize(Roles = "Librarian,User", AuthenticationSchemes = "Bearer")]
+        [HttpPut("{id}")]
+        public ActionResult UpdateUser(int id, [FromBody] UpdateProfileDto model)
+        {
+            try
+            {
+                _userService.UpdateUser(id, model);
+                return Ok("Updated");
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
     }
 }
