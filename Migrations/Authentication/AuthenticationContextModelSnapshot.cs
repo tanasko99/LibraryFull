@@ -95,17 +95,17 @@ namespace FullLibrary.Migrations.Authentication
                     b.HasData(
                         new
                         {
-                            Id = "0bb87d68-693c-4b9f-a852-181da1a3e182",
+                            Id = "614556cd-6319-478f-b299-0a6769a9d676",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5e63d5ae-d25d-478f-9dbc-09544ad00aeb",
+                            ConcurrencyStamp = "70245754-7909-422a-b44f-265273c692f6",
                             Email = "vuk@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "VUK@ADMIN.COM",
                             NormalizedUserName = "VUK@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEG62FCkpjozsTdlknK23PLz5fxACk+uWpXqboQ8AjCG/zzEA5ziB4ZnUYjfSED07uA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKzArqZs1qVbat1BAwUf2NJB6ORFhklggoCXpZFdbAJtqpxNXB5zpUTRqMb5oHSC7g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "94c8bed8-c857-420e-aed0-6cb8be5bbff2",
+                            SecurityStamp = "0812d941-145b-4e3d-8558-6e73db7add7f",
                             TwoFactorEnabled = false,
                             UserName = "vuk@admin.com"
                         });
@@ -140,19 +140,19 @@ namespace FullLibrary.Migrations.Authentication
                     b.HasData(
                         new
                         {
-                            Id = "e7e58973-7e50-4026-bbd5-36d9262e7e41",
+                            Id = "2c50aa6f-cf55-4dd1-a520-0c4aab8b2813",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "28cbb95a-2b9c-4901-9d16-7192682043fa",
+                            Id = "9732411b-5374-4aef-9cc5-b160789c7cf6",
                             Name = "Librarian",
                             NormalizedName = "LIBRARIAN"
                         },
                         new
                         {
-                            Id = "d1be204b-9c47-49d3-991a-9eda8f449e7e",
+                            Id = "f2c4c6f0-ebec-452f-85bd-5def72d539c9",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -247,8 +247,8 @@ namespace FullLibrary.Migrations.Authentication
                     b.HasData(
                         new
                         {
-                            UserId = "0bb87d68-693c-4b9f-a852-181da1a3e182",
-                            RoleId = "e7e58973-7e50-4026-bbd5-36d9262e7e41"
+                            UserId = "614556cd-6319-478f-b299-0a6769a9d676",
+                            RoleId = "2c50aa6f-cf55-4dd1-a520-0c4aab8b2813"
                         });
                 });
 
