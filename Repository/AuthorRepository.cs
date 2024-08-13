@@ -11,5 +11,33 @@ namespace FullLibrary.Repository
         {
             Create(author);
         }
+
+        public void UpdateAuthor(Author author)
+        {
+            Update(author);
+        }
+
+        public bool DeleteAuthor(int id)
+        {
+            var author = GetAuthorById(id);
+            if (author == null)
+            {
+                return false;
+            }
+            Delete(author);
+            return true;
+        }
+
+        public IQueryable<Author> GetAllAuthors()
+        {
+            return FindAll();
+        }
+
+        public Author GetAuthorById(int id)
+        {
+            return FindByCondition(x => x.Id == id).FirstOrDefault();
+        }
+
+        
     }
 }

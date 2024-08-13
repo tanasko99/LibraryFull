@@ -22,6 +22,8 @@ namespace FullLibrary.Mappings
                     .ForMember(dest => dest.LastName, opt => opt.MapFrom(source => source.LastName))
                 .DisableCtorValidation();
 
+            CreateMap<Author, AuthorDto>();
+
             CreateMap<AuthorUpdateDto, Author>()
                     .ForMember(dest => dest.FirstName, opt => opt.MapFrom(source => source.FirstName))
                     .ForMember(dest => dest.LastName, opt => opt.MapFrom(source => source.LastName));
