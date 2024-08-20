@@ -27,6 +27,13 @@ namespace FullLibrary.Mappings
             CreateMap<AuthorUpdateDto, Author>()
                     .ForMember(dest => dest.FirstName, opt => opt.MapFrom(source => source.FirstName))
                     .ForMember(dest => dest.LastName, opt => opt.MapFrom(source => source.LastName));
+
+            CreateMap<BookDto, Book>()
+                    .ForMember(dest => dest.Title, opt => opt.MapFrom(source => source.Title))
+                .DisableCtorValidation();
+
+            CreateMap<Book, BookDto>();
+            
         }
     }
 }

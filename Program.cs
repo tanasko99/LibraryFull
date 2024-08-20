@@ -59,6 +59,7 @@ builder.Services.AddDbContext<AuthenticationContext>(options => options.UseSqlSe
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IUserService,UserService>();
 builder.Services.AddTransient<IAuthorService, AuthorService>();
+builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddTransient<IRepositoryWrapper,RepositoryWrapper>();
 
 // configure automapper
