@@ -14,5 +14,6 @@ namespace FullLibrary.Models
 
         [StringLength(100)]
         public string LastName { get; set; }
+        public ICollection<Book> Books { get; set; }
     }
 }

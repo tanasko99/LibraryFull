@@ -7,6 +7,7 @@ namespace FullLibrary.Repository
         private DataContext _context;
         private IUserRepository _user;
         private IAuthorRepository _author;
+        private IBookRepository _book;
 
         public IUserRepository User
         {
@@ -29,6 +30,17 @@ namespace FullLibrary.Repository
                     _author = new AuthorRepository(_context);
                 }
                 return _author;
+            }
+        }
+        public IBookRepository Book
+        {
+            get
+            {
+                if( _book == null)
+                {
+                    _book = new BookRepository(_context);
+                }
+                return _book;
             }
         }
 
